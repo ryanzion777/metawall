@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var postController = require('../controllers/postController');
+var postController = require('../controllers/post');
 
 router.get('/', postController.getAllData);
 

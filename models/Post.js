@@ -6,11 +6,11 @@ const postSchema = new Schema(
     user: {
       type: mongoose.Types.ObjectId,
       ref: 'User',
-      required: [true, 'field-user is required']
+      required: [true, 'user is required']
     },
     content: {
       type: String,
-      required: [true, 'field-content is required']
+      required: [true, 'content is required']
     },
     image: {
       type: String,
