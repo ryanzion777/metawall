@@ -1,0 +1,135 @@
+{
+	"info": {
+		"_postman_id": "a1cb1c79-488e-4a59-a7f3-0f4fe3387096",
+		"name": "MetaWall",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19716522"
+	},
+	"item": [
+		{
+			"name": "取得全部貼文",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://pacific-hollows-47308.herokuapp.com/api/posts",
+					"protocol": "https",
+					"host": [
+						"pacific-hollows-47308",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "新增單一貼文",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"content\": \"test123123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://pacific-hollows-47308.herokuapp.com/api/posts",
+					"protocol": "https",
+					"host": [
+						"pacific-hollows-47308",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "編輯單一貼文",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"content\": \"test123123patch\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://pacific-hollows-47308.herokuapp.com/api/posts/62970fde84d56bcf3f59d72a",
+					"protocol": "https",
+					"host": [
+						"pacific-hollows-47308",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"posts",
+						"62970fde84d56bcf3f59d72a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "刪除單一貼文",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://pacific-hollows-47308.herokuapp.com/api/posts/62970fde84d56bcf3f59d72a",
+					"protocol": "https",
+					"host": [
+						"pacific-hollows-47308",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"posts",
+						"62970fde84d56bcf3f59d72a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "刪除全部貼文",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://pacific-hollows-47308.herokuapp.com/api/posts",
+					"protocol": "https",
+					"host": [
+						"pacific-hollows-47308",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"posts"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
