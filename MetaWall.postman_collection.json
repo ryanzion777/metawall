@@ -138,7 +138,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"zion\",\n    \"email\": \"ryan@gmail.com\",\n    \"password\": \"q1234567\",\n    \"confirmPassword\": \"q1234567\"\n}",
+					"raw": "{\n    \"name\": \"zion\",\n    \"email\": \"zion@gmail.com\",\n    \"password\": \"q1234567\",\n    \"confirmPassword\": \"q1234567\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -169,7 +169,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"email\": \"zion@gmail.com\",\n  \"password\": \"q12345678\"\n}",
+					"raw": "{\n  \"email\": \"zion@gmail.com\",\n  \"password\": \"q1234567\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -206,7 +206,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"password\": \"q12345678\",\n    \"confirmPassword\": \"q12345678\"\n}",
+					"raw": "{\n    \"password\": \"q1234567\",\n    \"confirmPassword\": \"q1234567\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -271,7 +271,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"zion update\",\n    \"avatar\": \"test\",\n    \"gender\": \"male\"\n}",
+					"raw": "{\n    \"name\": \"zion\",\n    \"avatar\": \"test\",\n    \"gender\": \"male\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
