@@ -17,7 +17,7 @@ const getAllData = catchAsync(async(req, res, next) => {
     select: 'name image'
   }).sort(sort);
   successHandle({
-    res, message: 'Get All Post', data
+    res, message: '取得貼文成功', data
   });
 });
 
@@ -30,7 +30,7 @@ const postData = catchAsync(async(req, res, next) => {
       content, image, likes
     });
     successHandle({
-      res, message: 'Post One Post', data
+      res, message: '上傳貼文成功', data
     });
   }
   else {
@@ -38,7 +38,7 @@ const postData = catchAsync(async(req, res, next) => {
   }
 });
 
-const patchData = catchAsync(async(req, res, next) => {
+const updateData = catchAsync(async(req, res, next) => {
   const { id } = req.params;
   const { user, content } = req.body;
   const hasID = await Post.findById(id);
@@ -48,7 +48,7 @@ const patchData = catchAsync(async(req, res, next) => {
     if(content) nowPatch.content = content;
     const data = await Post.findByIdAndUpdate(id, nowPatch, {new: true});
     successHandle({
-      res, message: 'Patch One Post', data
+      res, message: '更新貼文成功', data
     });
   }
   else {
@@ -62,7 +62,7 @@ const deleteData = catchAsync(async(req, res, next) => {
   if(hasID) {
     const data = await Post.findByIdAndDelete(id);
     successHandle({
-      res, message: 'Delete One Post', data
+      res, message: '刪除單一貼文成功', data
     });
   }
   else {
@@ -74,10 +74,10 @@ const deleteAllData = catchAsync(async(req, res, next) => {
   await Post.deleteMany({});
   const data = await Post.find();
   successHandle({
-    res, message: 'Delete All Posts', data
+    res, message: '刪除所有貼文成功', data
   });
 });
 
 module.exports = {
-  getAllData, postData, patchData, deleteData, deleteAllData
+  getAllData, postData, updateData, deleteData, deleteAllData
 };

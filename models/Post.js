@@ -6,23 +6,16 @@ const postSchema = new Schema(
     user: {
       type: mongoose.Types.ObjectId,
       ref: 'User',
-      required: [true, 'user is required']
+      required: [true, '使用者 為必填']
     },
     content: {
       type: String,
-      required: [true, 'content is required']
+      required: [true, '貼文內容 為必填']
     },
     image: {
       type: String,
       default: ''
     },
-    likes: [
-      {
-        type: mongoose.Types.ObjectId,
-        ref: 'User',
-        default: 0
-      }
-    ],
     createdAt: {
       type: Date,
       default: Date.now

@@ -6,7 +6,7 @@ router.get('/', postController.getAllData);
 
 router.post('/', postController.postData);
 
-router.patch('/:id', postController.patchData);
+router.patch('/:id', postController.updateData);
 
 router.delete('/:id', postController.deleteData);
 
