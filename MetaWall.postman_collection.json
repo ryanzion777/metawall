@@ -130,6 +130,170 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "註冊",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"zion\",\n    \"email\": \"ryan@gmail.com\",\n    \"password\": \"q1234567\",\n    \"confirmPassword\": \"q1234567\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://pacific-hollows-47308.herokuapp.com/api/auth/signup",
+					"protocol": "https",
+					"host": [
+						"pacific-hollows-47308",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "登入",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"zion@gmail.com\",\n  \"password\": \"q12345678\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://pacific-hollows-47308.herokuapp.com/api/auth/login",
+					"protocol": "https",
+					"host": [
+						"pacific-hollows-47308",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "重設密碼",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOWRiNWUxNzNhNjc3ZWIyMjg0ODA4ZCIsImlhdCI6MTY1NDU5NzA0MywiZXhwIjoxNjU0NjgzNDQzfQ.WayTNrSkSX_daq7xbJJPcbeJlvyGxfo1yaW8ZkATzIw",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"password\": \"q12345678\",\n    \"confirmPassword\": \"q12345678\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://pacific-hollows-47308.herokuapp.com/api/users/resetPassword",
+					"protocol": "https",
+					"host": [
+						"pacific-hollows-47308",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"users",
+						"resetPassword"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "取得目前使用者資訊",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOWRiNWUxNzNhNjc3ZWIyMjg0ODA4ZCIsImlhdCI6MTY1NDU5NzA0MywiZXhwIjoxNjU0NjgzNDQzfQ.WayTNrSkSX_daq7xbJJPcbeJlvyGxfo1yaW8ZkATzIw",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://pacific-hollows-47308.herokuapp.com/api/users/currentUser",
+					"protocol": "https",
+					"host": [
+						"pacific-hollows-47308",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"users",
+						"currentUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "更新目前使用者資訊",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOWRiNWUxNzNhNjc3ZWIyMjg0ODA4ZCIsImlhdCI6MTY1NDU5NzA0MywiZXhwIjoxNjU0NjgzNDQzfQ.WayTNrSkSX_daq7xbJJPcbeJlvyGxfo1yaW8ZkATzIw",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"zion update\",\n    \"avatar\": \"test\",\n    \"gender\": \"male\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://pacific-hollows-47308.herokuapp.com/api/users/currentUser",
+					"protocol": "https",
+					"host": [
+						"pacific-hollows-47308",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"users",
+						"currentUser"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
