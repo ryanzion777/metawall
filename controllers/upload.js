@@ -9,6 +9,8 @@ const { ImgurClient } = require('imgur');
   上傳圖片 POST
 */
 const postImages = catchAsync(async(req, res, next) => {
+  console.log(req.files, 'f1')
+  console.log(req.file, 'f2')
   if(!req.files.length) {
     return next(appError({
       message: '尚無上傳圖片！',
