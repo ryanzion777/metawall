@@ -1,15 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/user.js');
-const { isAuth } = require('../controllers/auth.js');
-
+const { isAuth } = require('../middlewares/auth.js');
 
 // 取得目前使用者資訊
-router.get('/currentUser', isAuth, userController.getCurrentUserInfo);
+router.get('/users/current_user', isAuth, userController.getCurrentUserInfo);
+
 // 更新目前使用者資訊
-router.patch('/currentUser', isAuth, userController.updateCurrentUserInfo);
+router.patch('/users/current_user', isAuth, userController.updateCurrentUserInfo);
 
 // 更新密碼
-router.patch('/resetPassword', isAuth, userController.updatePassword);
+router.patch('/users/reset_password', isAuth, userController.updatePassword);
 
 module.exports = router;

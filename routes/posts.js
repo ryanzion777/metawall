@@ -1,15 +1,24 @@
-var express = require('express');
-var router = express.Router();
-var postController = require('../controllers/post');
+const express = require('express');
+const router = express.Router();
+const postController = require('../controllers/post');
+const { isAuth } = require('../middlewares/auth.js');
 
-router.get('/', postController.getAllData);
+// 取得資料庫所有貼文
+router.get('/posts', isAuth, postController.getAllData);
 
-router.post('/', postController.postData);
+// 取得當前使用者所有貼文
+router.get('/posts/current_user', isAuth, postController.getCurrentUserAllData);
 
-router.patch('/:id', postController.updateData);
+// 上傳單一貼文
+router.post('/post/1', isAuth, postController.postData);
 
-router.delete('/:id', postController.deleteData);
+// 更新單一貼文
+router.patch('/post/1/:post_id', isAuth, postController.updateData);
 
-router.delete('/', postController.deleteAllData);
+// 刪除單一貼文
+router.delete('/post/1/:post_id', isAuth, postController.deleteData);
+
+// 刪除所有貼文
+router.delete('/posts', isAuth, postController.deleteAllData);
 
 module.exports = router;

@@ -1,6 +1,6 @@
 // Auth Controller
 const User = require('../models/User.js');
-const { successHandle } = require('../service/resHandle');
+const successHandle = require('../service/successHandle');
 const catchAsync = require('../service/catchAsync');
 const appError = require('../service/appError');
 const apiMessage = require('../service/apiMessage');
@@ -13,34 +13,55 @@ const bcrypt = require('bcryptjs');
 */
 const signup = catchAsync(async(req, res, next) => {
   let { name, email, password, confirmPassword } = req.body;
-  const errCode = 400;
+  const err_code = 400;
+  name = name.trim();
 
   // 驗證項目不得為空
   if(!name || !email || !password || !confirmPassword) {
     return next(appError({
       message: '填入項目不得為空',
-      statusCode: errCode
+      statusCode: err_code
+    }, next));
+  }
+  // 驗證名字超過兩位數
+  if(name.length < 2) {
+    return next(appError({
+      message: '名字至少 ２ 字元以上',
+      statusCode: err_code
     }, next));
   }
   // 驗證信箱格式
   if(!validator.isEmail(email)) {
     return next(appError({
       message: 'Email 格式錯誤',
-      statusCode: errCode
+      statusCode: err_code
+    }, next));
+  }
+  // 驗證密碼是否中英混合
+  if(!/(?=\w*\d)(?=\w*[a-zA-Z])\w+/.test(password)) {
+    return next(appError({
+      message: '密碼應該為中英混合',
+      statusCode: err_code
+    }, next));
+  }
+  if(!validator.isLength(password, { min: 8 })) {
+    return next(appError({
+      message: '密碼至少 8 碼以上',
+      statusCode: err_code
     }, next));
   }
   // 驗證密碼是否超過８位數
   if(!validator.isLength(password, { min: 8 })) {
     return next(appError({
       message: '密碼至少 8 碼以上',
-      statusCode: errCode
+      statusCode: err_code
     }, next));
   }
   // 驗證密碼是否一致
   if(password !== confirmPassword) {
     return next(appError({
       message: '密碼不一致',
-      statusCode: errCode
+      statusCode: err_code
     }, next));
   }
 
@@ -52,7 +73,7 @@ const signup = catchAsync(async(req, res, next) => {
       if (findRes !== null) {
         return next(appError({
           message: '此信箱已經被使用',
-          statusCode: errCode
+          statusCode: err_code
         }, next));
       }
     },
@@ -80,13 +101,27 @@ const signup = catchAsync(async(req, res, next) => {
 */
 const login = catchAsync(async(req, res, next) => {
   let { email, password } = req.body;
-  const errCode = 400;
+  const err_code = 400;
 
   // 驗證項目不得為空
   if(!email || !password) {
     return next(appError({
       message: '填入項目不得為空',
-      statusCode: errCode
+      statusCode: err_code
+    }, next));
+  }
+  // 驗證信箱格式
+  if(!validator.isEmail(email)) {
+    return next(appError({
+      message: 'Email 格式錯誤',
+      statusCode: err_code
+    }, next));
+  }
+  // 驗證密碼是否超過８位數
+  if(!validator.isLength(password, { min: 8 })) {
+    return next(appError({
+      message: '密碼至少 8 碼以上',
+      statusCode: err_code
     }, next));
   }
 
@@ -101,7 +136,7 @@ const login = catchAsync(async(req, res, next) => {
       if(findRes === null) {
         return next(appError({
           message: '帳號錯誤，請重新輸入',
-          statusCode: errCode
+          statusCode: err_code
         }, next));
       }
 
@@ -109,7 +144,7 @@ const login = catchAsync(async(req, res, next) => {
       if(!passwordCheck) {
         return next(appError({
           message: '密碼錯誤，請重新輸入',
-          statusCode: errCode
+          statusCode: err_code
         }, next));
       }
       password = undefined
@@ -205,51 +240,11 @@ const checkToken = catchAsync(async(req, res, next) => {
   });
 });
 
-/*
-  驗證是否登入用middleware
-*/
-const isAuth = catchAsync(async(req, res, next) => {
-  // 確認 token
-  let token;
-  if (
-    req.headers.authorization &&
-    req.headers.authorization.startsWith('Bearer')
-  ) {
-    token = req.headers.authorization.split(' ')[1];
-  }
-  if (!token) {
-    return next(appError(apiMessage.LOGIN_FAILED, next));
-  }
-
-  // 驗證 token 正確性
-  const decoded = await new Promise((resolve, reject) => {
-    jwt.verify(token, process.env.SECRET, (err, payload) => {
-      if(err) {
-        reject(err);
-      } else {
-        resolve(payload);
-      }
-    });
-  });
-
-  // 找到使用者
-  User.findById(decoded.id, function(findErr, findRes) {
-    if(findErr) {
-      return next(appError(apiMessage.LOGIN_FAILED, next));
-    }
-    else {
-      req.user = findRes;
-      next();
-    }
-  });
-});
-
 module.exports = {
   login,
   signup,
   logout,
-  checkToken,
-  isAuth
+  checkToken
 }
 
 

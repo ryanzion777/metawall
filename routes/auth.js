@@ -3,12 +3,12 @@ const router = express.Router();
 const authController = require('../controllers/auth.js');
 
 // 登入
-router.post('/signup', authController.signup);
+router.post('/auth/signup', authController.signup);
 // 註冊
-router.post('/login', authController.login);
+router.post('/auth/login', authController.login);
 // 登出
-router.post('/logout', authController.logout);
+router.post('/auth/logout', authController.logout);
 // 驗證token
-router.get('/check', authController.checkToken);
+router.get('/auth/check', authController.checkToken);
 
 module.exports = router;

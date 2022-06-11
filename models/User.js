@@ -21,7 +21,7 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: [true, '密碼 為必填'],
-      min: [8, '密碼至少 8 碼以上'],
+      min: [8, '密碼 至少 8 碼以上'],
       trim: true,
       select: false, 
     },
@@ -41,12 +41,17 @@ const userSchema = new Schema(
       default: ' ',
     },
     createdAt: {
-      type: Date,
-      default: Date.now
+      type: Number,
+    },
+    updatedAt: {
+      type: Number,
     }
   },
   {
-    versionKey: false
+    versionKey: false,
+    timestamps: {
+      currentTime: () => Date.now(),
+    },
   }
 );
 

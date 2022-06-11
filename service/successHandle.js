@@ -9,6 +9,4 @@ const successHandle = ({
   }).end()
 }
 
-module.exports = {
-  successHandle 
-}
+module.exports = successHandle 
