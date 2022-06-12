@@ -24,6 +24,10 @@ const apiMessage = {
     message: '請確認token是否 過期 或 錯誤',
     statusCode: 401,
   },
+  PERMISSION_DENIED: {
+    message: '權限不足',
+    statusCode: 403,
+  },
   ROUTER_NOT_FOUND: {
     message: '找不到路由',
     statusCode: 404,

@@ -7,42 +7,39 @@ const appError = require('../service/appError');
 const apiMessage = require('../service/apiMessage');
 
 /*
-  取得貼文按讚數量 GET
+  取得按讚貼文數量 GET
 */
 const getPostLikes = catchAsync(async(req, res, next) => {
   const { post_id } = req.query;
 
   if(!post_id) return next(appError(apiMessage.FIELD_FAILED, next));
 
-  const data = await Post.findById(post_id).select('_id likes').populate({
-    path: 'likes',
-    select: 'name avatar',
-  });
+  const data = await Post.findById(post_id).select('_id likes');
 
   if(!data) return next(appError(apiMessage.DATA_NOT_FOUND, next));
 
   successHandle({
     res, 
-    message: '取得貼文按讚數量成功',
+    message: '取得按讚貼文數量成功',
     data: {
-      like_length: data.likes.length,
-      post_list: data
+      likeLength: data.likes.length,
+      nowPost: data
     }
   });
 });
 
 /*
-  按讚貼文 與 取消讚貼文 PATCH
+  按讚貼文 與 取消讚貼文 POST
 */
 const togglePostLikes = catchAsync(async(req, res, next) => {
-  const { post_id, like_mode } = req.query;
+  const { post_id, likeMode } = req.query;
   const user_id = req.user_id;
-  let like_toggle = like_mode === 'add' ? true : false;
+  let likeToggle = likeMode === 'add' ? true : false;
   let data;
 
-  if(!post_id || !like_mode) return next(appError(apiMessage.FIELD_FAILED, next));
+  if(!post_id || !likeMode) return next(appError(apiMessage.FIELD_FAILED, next));
 
-  if(like_toggle) {
+  if(likeToggle) {
     data = await Post.findOneAndUpdate(
       { _id: post_id },
       { 
@@ -67,7 +64,7 @@ const togglePostLikes = catchAsync(async(req, res, next) => {
 
   if(!data) return next(appError(apiMessage.DATA_NOT_FOUND, next));
 
-  if(like_toggle) {
+  if(likeToggle) {
     successHandle({
       res, message: '已成功按讚', data
     });
