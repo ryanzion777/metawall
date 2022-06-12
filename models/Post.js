@@ -6,7 +6,7 @@ const postSchema = new Schema(
     user: {
       type: mongoose.Types.ObjectId,
       ref: 'User',
-      required: [true, '使用者 為必填']
+      required: [true, '使用者ID 為必填']
     },
     content: {
       type: String,
@@ -29,11 +29,19 @@ const postSchema = new Schema(
   }, 
   {
     versionKey: false,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
     timestamps: {
       currentTime: () => Date.now(),
     },
   }
 );
+
+postSchema.virtual('comments', {
+  ref: 'Comment',
+  foreignField: 'post',
+  localField: '_id'
+});
 
 const Post = model('Post', postSchema);
 

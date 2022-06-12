@@ -40,6 +40,32 @@ const userSchema = new Schema(
       required: false,
       default: ' ',
     },
+    // 追蹤名單
+    followings: [
+      {
+        _id: false,
+        user: { 
+          type: mongoose.Schema.ObjectId, 
+          ref: 'User' 
+        },
+        createdAt: {
+          type: Number,
+        },
+      },
+    ],
+    // 被追蹤名單
+    followers: [
+      {
+        _id: false,
+        user: { 
+          type: mongoose.Schema.ObjectId, 
+          ref: 'User' 
+        },
+        createdAt: {
+          type: Number,
+        },
+      },
+    ],
     createdAt: {
       type: Number,
     },

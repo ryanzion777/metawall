@@ -40,7 +40,7 @@
 					"response": []
 				},
 				{
-					"name": "取得當前使用者全部貼文",
+					"name": "取得某使用者全部貼文(作業)",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -51,21 +51,74 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}/api/posts/current_user",
+							"raw": "{{url}}/api/posts/user/{{userID}}",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"posts",
-								"current_user"
+								"user",
+								"{{userID}}"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "使用者新增單一貼文",
+					"name": "取得某使用者按讚貼文列表(作業)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/posts/likes/{{userID}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								"likes",
+								"{{userID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取得單一貼文(作業)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/post/1/{{postID}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"post",
+								"1",
+								"{{postID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "使用者新增單一貼文(作業)",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -99,7 +152,7 @@
 					"response": []
 				},
 				{
-					"name": "使用者編輯單一貼文",
+					"name": "使用者編輯單一貼文(額外)",
 					"request": {
 						"method": "PATCH",
 						"header": [
@@ -119,7 +172,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/post/1/62a4370b8957d0146e1a63b7",
+							"raw": "{{url}}/api/post/1/{{postID}}",
 							"host": [
 								"{{url}}"
 							],
@@ -127,7 +180,7 @@
 								"api",
 								"post",
 								"1",
-								"62a4370b8957d0146e1a63b7"
+								"{{postID}}"
 							]
 						}
 					},
@@ -145,7 +198,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}/api/post/1/62a457a10394e0238afa931e",
+							"raw": "{{url}}/api/post/1/{{postID}}",
 							"host": [
 								"{{url}}"
 							],
@@ -153,7 +206,7 @@
 								"api",
 								"post",
 								"1",
-								"62a457a10394e0238afa931e"
+								"{{postID}}"
 							]
 						}
 					},
@@ -189,7 +242,7 @@
 			"name": "會員操作",
 			"item": [
 				{
-					"name": "註冊",
+					"name": "註冊會員(作業)",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -229,7 +282,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"email\": \"ryan@gmail.com\",\n  \"password\": \"q1234567\"\n}",
+							"raw": "{\n  \"email\": \"zion@gmail.com\",\n  \"password\": \"q1234567\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -251,7 +304,7 @@
 					"response": []
 				},
 				{
-					"name": "重設密碼",
+					"name": "重設密碼(作業)",
 					"request": {
 						"method": "PATCH",
 						"header": [
@@ -290,7 +343,7 @@
 			"name": "使用者操作",
 			"item": [
 				{
-					"name": "取得目前使用者資訊",
+					"name": "取得個人資料(作業)",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -315,7 +368,7 @@
 					"response": []
 				},
 				{
-					"name": "更新目前使用者資訊",
+					"name": "更新個人資料(作業)",
 					"request": {
 						"method": "PATCH",
 						"header": [
@@ -354,7 +407,7 @@
 			"name": "按讚操作",
 			"item": [
 				{
-					"name": "取得按讚貼文數量",
+					"name": "取得按讚貼文數量(額外)",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -365,7 +418,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}/api/likes?post_id=62a457c50394e0238afa9334",
+							"raw": "{{url}}/api/likes?post_id={{postID}}",
 							"host": [
 								"{{url}}"
 							],
@@ -376,7 +429,7 @@
 							"query": [
 								{
 									"key": "post_id",
-									"value": "62a457c50394e0238afa9334"
+									"value": "{{postID}}"
 								}
 							]
 						}
@@ -384,9 +437,9 @@
 					"response": []
 				},
 				{
-					"name": "按讚貼文 與 取消讚貼文",
+					"name": "按讚貼文 與 取消讚貼文(作業)",
 					"request": {
-						"method": "POST",
+						"method": "PATCH",
 						"header": [
 							{
 								"key": "Authorization",
@@ -399,7 +452,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{url}}/api/likes?post_id=62a457c50394e0238afa9334&likeMode=remove",
+							"raw": "{{url}}/api/likes?post_id={{postID}}&like_mode=add",
 							"host": [
 								"{{url}}"
 							],
@@ -410,11 +463,12 @@
 							"query": [
 								{
 									"key": "post_id",
-									"value": "62a457c50394e0238afa9334"
+									"value": "{{postID}}"
 								},
 								{
-									"key": "likeMode",
-									"value": "remove"
+									"key": "like_mode",
+									"value": "add",
+									"description": "add / remove"
 								}
 							]
 						}
@@ -424,7 +478,205 @@
 			]
 		},
 		{
-			"name": "圖片上傳",
+			"name": "留言操作",
+			"item": [
+				{
+					"name": "取得貼文留言(額外)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/comments/{{postID}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"comments",
+								"{{postID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "新增留言(作業)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\": \"留言測試\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/comment/1/{{postID}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"comment",
+								"1",
+								"{{postID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "更新留言(額外)",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\": \"更新留言測試2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/comment/1/{{commentID}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"comment",
+								"1",
+								"{{commentID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "刪除留言(額外)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/comment/1/{{commentID}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"comment",
+								"1",
+								"{{commentID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "追蹤操作",
+			"item": [
+				{
+					"name": "取得追蹤名單(作業)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/follows_list?target_id={{userID}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"follows_list"
+							],
+							"query": [
+								{
+									"key": "target_id",
+									"value": "{{userID}}",
+									"description": "要取得的使用者 id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "追蹤 與 取消追蹤(作業)",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/follows?follow_id=629db558992a9ba67daf4528&follow_mode=unfollow",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"follows"
+							],
+							"query": [
+								{
+									"key": "follow_id",
+									"value": "629db558992a9ba67daf4528",
+									"description": "要追蹤的使用者 id"
+								},
+								{
+									"key": "follow_mode",
+									"value": "unfollow",
+									"description": "follow / unfollow"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "圖片上傳(作業)",
 			"request": {
 				"method": "POST",
 				"header": [

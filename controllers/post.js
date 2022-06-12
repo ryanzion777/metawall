@@ -9,7 +9,7 @@ const apiMessage = require('../service/apiMessage');
 /*
   取得資料庫所有貼文 GET
 */
-const getAllData = catchAsync(async(req, res, next) => {
+const getPosts = catchAsync(async(req, res, next) => {
   // q => 搜尋項目
   // s => 資料排序
   const { q, s } = req.query;
@@ -20,7 +20,11 @@ const getAllData = catchAsync(async(req, res, next) => {
     .populate({
       path: 'user',
       select: 'name image'
-    }).sort(sort);
+    })
+    .populate({
+      path: 'comments'
+    })
+    .sort(sort);
 
   successHandle({
     res, message: '取得貼文成功', data
@@ -28,31 +32,87 @@ const getAllData = catchAsync(async(req, res, next) => {
 });
 
 /*
-  取得當前使用者所有貼文 GET
+  取得單一貼文 GET
 */
-const getCurrentUserAllData = catchAsync(async(req, res, next) => {
+const getOnlyPost = catchAsync(async(req, res, next) => {
+  const { post_id } = req.params;
+
+  if(!post_id) {
+    return next(appError(apiMessage.FIELD_FAILED, next));
+  }
+
+  const data = await Post
+    .find({  
+      _id: post_id
+    })
+    .populate({
+      path: 'user',
+      select: '_id name avatar',
+    });
+
+  if(!data) return next(appError(apiMessage.DATA_NOT_FOUND, next));
+
+  successHandle({
+    res, message: '取得單一貼文成功', data
+  });
+});
+
+/*
+  取得使用者所有貼文 GET
+*/
+const getUserPosts = catchAsync(async(req, res, next) => {
   // q => 搜尋項目
   // s => 資料排序
+  const { target_user_id } = req.params;
   const { q, s } = req.query;
-  const user_id = req.user_id;
   const query = q ? { 'content': new RegExp(q) } : {};
   const sort = s === 'hot' ? { likes: -1 } : s === 'new' ? '-createdAt' : 'createdAt';
 
-  const data = await Post.find({ user: user_id, query })
+  const data = await Post.find({ user: target_user_id, query })
     .populate({
       path: 'user',
-      select: 'name image'
-    }).sort(sort);
+      select: 'name avatar'
+    })
+    .populate({
+      path: 'comments'
+    })
+    .sort(sort);
 
   successHandle({
-    res, message: '取得貼文成功', data
+    res, message: '取得使用者所有貼文成功', data
+  });
+});
+
+/*
+  取得使用者按讚的貼文 GET
+*/
+const getPostLikes = catchAsync(async(req, res, next) => {
+  const { target_user_id } = req.params;
+
+  if(!target_user_id) {
+    return next(appError(apiMessage.FIELD_FAILED, next));
+  }
+
+  const data = await Post
+    .find({  
+      likes: { $in: [target_user_id] }
+    })
+    .populate({
+      path: 'user',
+      select: 'name avatar',
+    });
+
+  if(!data) return next(appError(apiMessage.DATA_NOT_FOUND, next));
+
+  successHandle({
+    res, message: '取得使用者按讚的貼文成功', data
   });
 });
 
 /*
   上傳單一貼文 POST
 */
-const postData = catchAsync(async(req, res, next) => {
+const createPost = catchAsync(async(req, res, next) => {
   const { content, images, likes } = req.body;
   const user_id = req.user_id;
 
@@ -75,7 +135,7 @@ const postData = catchAsync(async(req, res, next) => {
 /*
   更新單一貼文 PATCH
 */
-const updateData = catchAsync(async(req, res, next) => {
+const updatePost = catchAsync(async(req, res, next) => {
   const { post_id } = req.params;
   const { content, images } = req.body;
   const user_id = req.user_id;
@@ -103,7 +163,7 @@ const updateData = catchAsync(async(req, res, next) => {
 /*
   刪除單一貼文 DELETE
 */
-const deleteData = catchAsync(async(req, res, next) => {
+const deletePost = catchAsync(async(req, res, next) => {
   const { post_id } = req.params;
   const user_id = req.user_id;
   
@@ -127,7 +187,7 @@ const deleteData = catchAsync(async(req, res, next) => {
 /*
   刪除所有貼文 DELETE
 */
-const deleteAllData = catchAsync(async(req, res, next) => {
+const deletePosts= catchAsync(async(req, res, next) => {
   await Post.deleteMany({});
   const data = await Post.find();
   successHandle({
@@ -137,5 +197,5 @@ const deleteAllData = catchAsync(async(req, res, next) => {
 
 
 module.exports = {
-  getAllData, getCurrentUserAllData, postData, updateData, deleteData, deleteAllData
+  getPosts, getUserPosts, getOnlyPost, getPostLikes, createPost, updatePost, deletePost, deletePosts
 };
