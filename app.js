@@ -13,6 +13,8 @@ var indexRouter = require('./routes/index');
 var postRouter = require('./routes/posts');
 var userRouter = require('./routes/users');
 var likeRouter = require('./routes/likes');
+var commentRouter = require('./routes/comments');
+var followRouter = require('./routes/follows');
 
 var app = express();
 
@@ -43,6 +45,8 @@ app.use('/api', uploadRouter);
 app.use('/api', postRouter);
 app.use('/api', userRouter);
 app.use('/api', likeRouter);
+app.use('/api', commentRouter);
+app.use('/api', followRouter);
 
 // catch 404 找不到路由
 app.use(function(req, res, next) {
@@ -94,7 +98,12 @@ app.use(function(err, req, res, next) {
     return resErrorProd(err, res);
   } else if(err.name === 'SyntaxError') {
     err.statusCode = 400;
-    err.message = "資料型態錯誤，請重新輸入";
+    err.message = "語法不合法或代碼錯誤，請重新確認";
+    err.isOperational = true;
+    return resErrorProd(err, res);
+  } else if(err.name === 'ReferenceError') {
+    err.statusCode = 400;
+    err.message = "找不到參數數值，請重新確認";
     err.isOperational = true;
     return resErrorProd(err, res);
   } 
