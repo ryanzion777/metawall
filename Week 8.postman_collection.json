@@ -1,248 +1,16 @@
 {
 	"info": {
-		"_postman_id": "a1cb1c79-488e-4a59-a7f3-0f4fe3387096",
-		"name": "MetaWall",
+		"_postman_id": "ac98abee-ec85-4ac3-a0c0-95a84fc59c1c",
+		"name": "Week 8",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "19716522"
 	},
 	"item": [
 		{
-			"name": "貼文操作",
+			"name": "會員功能",
 			"item": [
 				{
-					"name": "取得資料庫所有貼文",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{url}}/api/posts?s=new",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"posts"
-							],
-							"query": [
-								{
-									"key": "s",
-									"value": "new"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "取得某使用者全部貼文(作業)",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{url}}/api/posts/user/{{userID}}",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"posts",
-								"user",
-								"{{userID}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "取得某使用者按讚貼文列表(作業)",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{url}}/api/posts/likes/{{userID}}",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"posts",
-								"likes",
-								"{{userID}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "取得單一貼文(作業)",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{url}}/api/post/1/{{postID}}",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"post",
-								"1",
-								"{{postID}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "使用者新增單一貼文(作業)",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{token}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"content\": \"貼文測試\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/api/post/1",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"post",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "使用者編輯單一貼文(額外)",
-					"request": {
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{token}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"content\": \"編輯貼文\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/api/post/1/{{postID}}",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"post",
-								"1",
-								"{{postID}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "使用者刪除單一貼文",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{url}}/api/post/1/{{postID}}",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"post",
-								"1",
-								"{{postID}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "使用者刪除全部貼文",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{url}}/api/posts",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"posts"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "會員操作",
-			"item": [
-				{
-					"name": "註冊會員(作業)",
+					"name": "註冊會員",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -304,7 +72,7 @@
 					"response": []
 				},
 				{
-					"name": "重設密碼(作業)",
+					"name": "重設密碼",
 					"request": {
 						"method": "PATCH",
 						"header": [
@@ -336,14 +104,9 @@
 						}
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "使用者操作",
-			"item": [
+				},
 				{
-					"name": "取得個人資料(作業)",
+					"name": "取得個人資料",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -368,7 +131,7 @@
 					"response": []
 				},
 				{
-					"name": "更新個人資料(作業)",
+					"name": "更新個人資料",
 					"request": {
 						"method": "PATCH",
 						"header": [
@@ -404,10 +167,46 @@
 			]
 		},
 		{
-			"name": "按讚操作",
+			"name": "會員按讚追蹤動態",
 			"item": [
 				{
-					"name": "取得按讚貼文數量(額外)",
+					"name": "追蹤 與 取消追蹤",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/follows?follow_id=629db558992a9ba67daf4528&follow_mode=unfollow",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"follows"
+							],
+							"query": [
+								{
+									"key": "follow_id",
+									"value": "629db558992a9ba67daf4528",
+									"description": "要追蹤的使用者 id"
+								},
+								{
+									"key": "follow_mode",
+									"value": "unfollow",
+									"description": "follow / unfollow"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取得某使用者按讚貼文列表",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -418,18 +217,80 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}/api/likes?post_id={{postID}}",
+							"raw": "{{url}}/api/posts/likes/{{userID}}",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
-								"likes"
+								"posts",
+								"likes",
+								"{{userID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取得追蹤名單",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/follows_list?target_id={{userID}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"follows_list"
 							],
 							"query": [
 								{
-									"key": "post_id",
-									"value": "{{postID}}"
+									"key": "target_id",
+									"value": "{{userID}}",
+									"description": "要取得的使用者 id"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "動態貼文",
+			"item": [
+				{
+					"name": "取得資料庫所有貼文",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/posts?s=new",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"posts"
+							],
+							"query": [
+								{
+									"key": "s",
+									"value": "new"
 								}
 							]
 						}
@@ -437,7 +298,67 @@
 					"response": []
 				},
 				{
-					"name": "按讚貼文 與 取消讚貼文(作業)",
+					"name": "取得單一貼文",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/post/1/{{postID}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"post",
+								"1",
+								"{{postID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "使用者新增單一貼文",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\": \"貼文測試\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/post/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"post",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "按讚貼文 與 取消讚貼文",
 					"request": {
 						"method": "PATCH",
 						"header": [
@@ -474,39 +395,9 @@
 						}
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "留言操作",
-			"item": [
-				{
-					"name": "取得貼文留言(額外)",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{url}}/api/comments/{{postID}}",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"comments",
-								"{{postID}}"
-							]
-						}
-					},
-					"response": []
 				},
 				{
-					"name": "新增留言(作業)",
+					"name": "新增留言",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -535,6 +426,127 @@
 								"comment",
 								"1",
 								"{{postID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取得某使用者全部貼文",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/posts/user/{{userID}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								"user",
+								"{{userID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "其他",
+			"item": [
+				{
+					"name": "圖片上傳",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "test",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/upload",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "額外",
+			"item": [
+				{
+					"name": "取得貼文留言(額外)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/comments/{{postID}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"comments",
+								"{{postID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "刪除留言(額外)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/comment/1/{{commentID}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"comment",
+								"1",
+								"{{commentID}}"
 							]
 						}
 					},
@@ -576,9 +588,9 @@
 					"response": []
 				},
 				{
-					"name": "刪除留言(額外)",
+					"name": "使用者編輯單一貼文(額外)",
 					"request": {
-						"method": "DELETE",
+						"method": "PATCH",
 						"header": [
 							{
 								"key": "Authorization",
@@ -586,28 +598,32 @@
 								"type": "text"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\": \"編輯貼文\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{url}}/api/comment/1/{{commentID}}",
+							"raw": "{{url}}/api/post/1/{{postID}}",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
-								"comment",
+								"post",
 								"1",
-								"{{commentID}}"
+								"{{postID}}"
 							]
 						}
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "追蹤操作",
-			"item": [
+				},
 				{
-					"name": "取得追蹤名單(作業)",
+					"name": "取得按讚貼文數量(額外)",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -618,55 +634,18 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}/api/follows_list?target_id={{userID}}",
+							"raw": "{{url}}/api/likes?post_id={{postID}}",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
-								"follows_list"
+								"likes"
 							],
 							"query": [
 								{
-									"key": "target_id",
-									"value": "{{userID}}",
-									"description": "要取得的使用者 id"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "追蹤 與 取消追蹤(作業)",
-					"request": {
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{url}}/api/follows?follow_id=629db558992a9ba67daf4528&follow_mode=unfollow",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"follows"
-							],
-							"query": [
-								{
-									"key": "follow_id",
-									"value": "629db558992a9ba67daf4528",
-									"description": "要追蹤的使用者 id"
-								},
-								{
-									"key": "follow_mode",
-									"value": "unfollow",
-									"description": "follow / unfollow"
+									"key": "post_id",
+									"value": "{{postID}}"
 								}
 							]
 						}
@@ -674,65 +653,6 @@
 					"response": []
 				}
 			]
-		},
-		{
-			"name": "圖片上傳(作業)",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer {{token}}",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "test",
-							"type": "file",
-							"src": []
-						}
-					]
-				},
-				"url": {
-					"raw": "{{url}}/api/upload",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"api",
-						"upload"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "驗證token",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer {{token}}",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "{{url}}/api/auth/check",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"api",
-						"auth",
-						"check"
-					]
-				}
-			},
-			"response": []
 		}
 	]
 }
