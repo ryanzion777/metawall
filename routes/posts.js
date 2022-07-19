@@ -1,30 +1,30 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const postController = require('../controllers/post');
-const { isAuth } = require('../middlewares/auth.js');
+const postController = require("../controllers/post");
+const { isAuth } = require("../middlewares/auth");
 
 // 取得資料庫所有貼文
-router.get('/posts', isAuth, postController.getPosts);
+router.get("/posts", isAuth, postController.getPosts);
 
 // 取得單一貼文
-router.get('/post/1/:post_id', isAuth, postController.getOnlyPost);
+router.get("/post/1/:post_id", isAuth, postController.getOnlyPost);
 
 // 取得使用者所有貼文
-router.get('/posts/user/:target_user_id', isAuth, postController.getUserPosts);
+router.get("/posts/user/:target_user_id", isAuth, postController.getUserPosts);
 
 // 取得使用者按讚的貼文
-router.get('/posts/likes/:target_user_id', isAuth, postController.getPostLikes);
+router.get("/posts/likes/:target_user_id", isAuth, postController.getPostLikes);
 
 // 上傳單一貼文
-router.post('/post/1', isAuth, postController.createPost);
+router.post("/post/1", isAuth, postController.createPost);
 
 // 更新單一貼文
-router.patch('/post/1/:post_id', isAuth, postController.updatePost);
+router.patch("/post/1/:post_id", isAuth, postController.updatePost);
 
 // 刪除單一貼文
-router.delete('/post/1/:post_id', isAuth, postController.deletePost);
+router.delete("/post/1/:post_id", isAuth, postController.deletePost);
 
 // 刪除所有貼文
-router.delete('/posts', isAuth, postController.deletePosts);
+router.delete("/posts", isAuth, postController.deletePosts);
 
 module.exports = router;

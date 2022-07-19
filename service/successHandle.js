@@ -1,12 +1,11 @@
+const successHandle = ({ res, message, data }) => {
+  res
+    .send({
+      status: true,
+      message,
+      data,
+    })
+    .end();
+};
 
-const successHandle = ({
-  res, message, data
-}) => {
-  res.send({
-    status: true,
-    message,
-    data
-  }).end()
-}
-
-module.exports = successHandle 
+module.exports = successHandle;

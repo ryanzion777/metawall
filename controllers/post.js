@@ -20,7 +20,7 @@ const getPosts = catchAsync(async (req, res, next) => {
   const data = await Post.find(query)
     .populate({
       path: "user",
-      select: "_id name avatar",
+      select: "name avatar",
     })
     .populate({
       path: "comments",
@@ -49,7 +49,7 @@ const getOnlyPost = catchAsync(async (req, res, next) => {
   })
     .populate({
       path: "user",
-      select: "_id name avatar",
+      select: "name avatar",
     })
     .populate({
       path: "comments",
@@ -123,7 +123,7 @@ const getPostLikes = catchAsync(async (req, res, next) => {
   上傳單一貼文 POST
 */
 const createPost = catchAsync(async (req, res, next) => {
-  const { content, images, likes } = req.body;
+  const { content, images } = req.body;
   const user_id = req.user_id;
 
   if (!content || !user_id) {
@@ -134,7 +134,6 @@ const createPost = catchAsync(async (req, res, next) => {
     user: user_id,
     content,
     images,
-    likes,
   });
 
   successHandle({

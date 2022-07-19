@@ -1,32 +1,34 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
 
 const postSchema = new Schema(
   {
     user: {
       type: mongoose.Types.ObjectId,
-      ref: 'User',
-      required: [true, '使用者ID 為必填']
+      ref: "User",
+      required: [true, "使用者ID 為必填"],
     },
     content: {
       type: String,
-      required: [true, '貼文內容 為必填']
+      required: [true, "貼文內容 為必填"],
     },
     images: {
-      type: String,
-      default: ''
+      type: Array,
+      default: "",
     },
-    likes: [{
-      type: mongoose.Schema.ObjectId,
-      ref: 'User',
-    }],
+    likes: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: "User",
+      },
+    ],
     createdAt: {
       type: Number,
     },
     updatedAt: {
       type: Number,
-    }
-  }, 
+    },
+  },
   {
     versionKey: false,
     toJSON: { virtuals: true },
@@ -37,12 +39,12 @@ const postSchema = new Schema(
   }
 );
 
-postSchema.virtual('comments', {
-  ref: 'Comment',
-  foreignField: 'post',
-  localField: '_id'
+postSchema.virtual("comments", {
+  ref: "Comment",
+  foreignField: "post",
+  localField: "_id",
 });
 
-const Post = model('Post', postSchema);
+const Post = model("Post", postSchema);
 
 module.exports = Post;

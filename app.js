@@ -1,23 +1,23 @@
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
-var cors = require("cors");
-var connectDB = require("./service/connectHandle");
-var appError = require("./service/appError");
-var apiMessage = require("./service/apiMessage");
+const createError = require("http-errors");
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
+const cors = require("cors");
+const connectDB = require("./service/connectHandle");
+const appError = require("./service/appError");
+const apiMessage = require("./service/apiMessage");
 
-var authRouter = require("./routes/auth");
-var uploadRouter = require("./routes/upload");
-var indexRouter = require("./routes/index");
-var postRouter = require("./routes/posts");
-var userRouter = require("./routes/users");
-var likeRouter = require("./routes/likes");
-var commentRouter = require("./routes/comments");
-var followRouter = require("./routes/follows");
+const authRouter = require("./routes/auth");
+const uploadRouter = require("./routes/upload");
+const indexRouter = require("./routes/index");
+const postRouter = require("./routes/posts");
+const userRouter = require("./routes/users");
+const likeRouter = require("./routes/likes");
+const commentRouter = require("./routes/comments");
+const followRouter = require("./routes/follows");
 
-var app = express();
+const app = express();
 
 // 程式出現重大錯誤時
 process.on("uncaughtException", (err) => {
@@ -52,9 +52,7 @@ app.use("/api", commentRouter);
 app.use("/api", followRouter);
 
 // catch 404 找不到路由
-app.use(function (req, res, next) {
-  return next(appError(apiMessage.ROUTER_NOT_FOUND, next));
-});
+app.use((req, res, next) => next(appError(apiMessage.ROUTER_NOT_FOUND, next)));
 
 // 正式環境錯誤
 const resErrorProd = (err, res) => {
@@ -82,7 +80,7 @@ const resErrorDev = (err, res) => {
 };
 
 // 底層錯誤處理 dev開發 || prod正式
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
   // dev
   if (process.env.NODE_ENV === "dev") {
@@ -94,17 +92,20 @@ app.use(function (err, req, res, next) {
     err.message = "資料欄位未填寫正確，請重新輸入";
     err.isOperational = true;
     return resErrorProd(err, res);
-  } else if (err.name === "CastError") {
+  }
+  if (err.name === "CastError") {
     err.statusCode = 400;
     err.message = "ＩＤ格式錯誤，請重新輸入";
     err.isOperational = true;
     return resErrorProd(err, res);
-  } else if (err.name === "SyntaxError") {
+  }
+  if (err.name === "SyntaxError") {
     err.statusCode = 400;
     err.message = "語法不合法或代碼錯誤，請重新確認";
     err.isOperational = true;
     return resErrorProd(err, res);
-  } else if (err.name === "ReferenceError") {
+  }
+  if (err.name === "ReferenceError") {
     err.statusCode = 400;
     err.message = "找不到參數數值，請重新確認";
     err.isOperational = true;

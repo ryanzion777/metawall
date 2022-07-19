@@ -1,19 +1,24 @@
 // upload Controller
-const successHandle = require('../service/successHandle');
-const catchAsync = require('../service/catchAsync');
-const appError = require('../service/appError');
-const apiMessage = require('../service/apiMessage');
-const { ImgurClient } = require('imgur');
+const successHandle = require("../service/successHandle");
+const catchAsync = require("../service/catchAsync");
+const appError = require("../service/appError");
+const apiMessage = require("../service/apiMessage");
+const { ImgurClient } = require("imgur");
 
 /*
   上傳圖片 POST
 */
-const postImages = catchAsync(async(req, res, next) => {
-  if(!req.files.length) {
-    return next(appError({
-      message: '尚無上傳圖片！',
-      statusCode: 500
-    }, next));
+const postImages = catchAsync(async (req, res, next) => {
+  if (!req.files.length) {
+    return next(
+      appError(
+        {
+          message: "尚無上傳圖片！",
+          statusCode: 500,
+        },
+        next
+      )
+    );
   }
   const client = new ImgurClient({
     clientId: process.env.IMGUR_CLIENTID,
@@ -23,21 +28,21 @@ const postImages = catchAsync(async(req, res, next) => {
   const images = [];
   for await (const file of req.files) {
     const response = await client.upload({
-      image: file.buffer.toString('base64'),
-      type: 'base64',
-      album: process.env.IMGUR_ALBUM_ID
+      image: file.buffer.toString("base64"),
+      type: "base64",
+      album: process.env.IMGUR_ALBUM_ID,
     });
-    images.push(response.data.link)
+    images.push(response.data.link);
   }
   successHandle({
-    res, 
-    message: '上傳圖片成功！',
+    res,
+    message: "上傳圖片成功！",
     data: {
-      images: images
-    }
+      images: images,
+    },
   });
 });
 
 module.exports = {
-  postImages
-}
+  postImages,
+};

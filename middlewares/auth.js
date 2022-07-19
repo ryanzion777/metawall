@@ -1,20 +1,20 @@
-const User = require('../models/User.js');
-const catchAsync = require('../service/catchAsync');
-const appError = require('../service/appError');
-const apiMessage = require('../service/apiMessage');
-const jwt = require('jsonwebtoken');
+const User = require("../models/User");
+const catchAsync = require("../service/catchAsync");
+const appError = require("../service/appError");
+const apiMessage = require("../service/apiMessage");
+const jwt = require("jsonwebtoken");
 
 /*
   驗證是否登入
 */
-const isAuth = catchAsync(async(req, res, next) => {
+const isAuth = catchAsync(async (req, res, next) => {
   // 確認 token
   let token;
   if (
     req.headers.authorization &&
-    req.headers.authorization.startsWith('Bearer')
+    req.headers.authorization.startsWith("Bearer")
   ) {
-    token = req.headers.authorization.split(' ')[1];
+    token = req.headers.authorization.split(" ")[1];
   }
   if (!token) {
     return next(appError(apiMessage.LOGIN_FAILED, next));
@@ -23,7 +23,7 @@ const isAuth = catchAsync(async(req, res, next) => {
   // 驗證 token 正確性
   const decoded = await new Promise((resolve, reject) => {
     jwt.verify(token, process.env.SECRET, (err, payload) => {
-      if(err) {
+      if (err) {
         return next(appError(apiMessage.TOKEN_FAILED, next));
       } else {
         resolve(payload);
@@ -32,11 +32,10 @@ const isAuth = catchAsync(async(req, res, next) => {
   });
 
   // 找到使用者
-  User.findById(decoded.id, function(findErr, findRes) {
-    if(findErr) {
+  User.findById(decoded.id, function (findErr, findRes) {
+    if (findErr) {
       return next(appError(apiMessage.LOGIN_FAILED, next));
-    }
-    else {
+    } else {
       req.user_id = findRes._id;
       next();
     }
@@ -44,5 +43,5 @@ const isAuth = catchAsync(async(req, res, next) => {
 });
 
 module.exports = {
-  isAuth
-}
+  isAuth,
+};
