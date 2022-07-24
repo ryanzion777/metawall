@@ -1,11 +1,16 @@
 const mongoose = require('mongoose')
 const { Schema, model } = mongoose
 
-const commentSchema = new Schema(
+const commentReplySchema = new Schema(
   {
     content: {
       type: String,
-      require: [true, '留言內容 為必填']
+      require: [true, '留言回覆內容 為必填']
+    },
+    comment: {
+      type: mongoose.Schema.ObjectId,
+      required: [true, '留言ID 為必填'],
+      ref: 'Comment'
     },
     post: {
       type: mongoose.Schema.ObjectId,
@@ -26,31 +31,21 @@ const commentSchema = new Schema(
   },
   {
     versionKey: false,
-    toJSON: { virtuals: true },
-    toObject: { virtuals: true },
     timestamps: {
       currentTime: () => Date.now()
     }
   }
 )
 
-commentSchema.pre(/^find/, function (next) {
+commentReplySchema.pre(/^find/, function (next) {
   this.populate({
     path: 'user',
     select: '_id name avatar'
   })
-  this.populate({
-    path: 'commentRelies'
-  })
+
   next()
 })
 
-commentSchema.virtual('commentRelies', {
-  ref: 'CommentReply',
-  foreignField: 'comment',
-  localField: '_id'
-})
+const CommentReply = model('CommentReply', commentReplySchema)
 
-const Comment = model('Comment', commentSchema)
-
-module.exports = Comment
+module.exports = CommentReply

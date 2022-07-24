@@ -1,44 +1,44 @@
-const mongoose = require("mongoose");
-const { Schema, model } = mongoose;
-const validator = require("validator");
+const mongoose = require('mongoose')
+const { Schema, model } = mongoose
+const validator = require('validator')
 
 const userSchema = new Schema(
   {
     // 暱稱
     name: {
       type: String,
-      required: [true, "暱稱 為必填"],
-      minlength: 2,
+      required: [true, '暱稱 為必填'],
+      minlength: 2
     },
     // Email
     email: {
       type: String,
-      required: [true, "Email 為必填"],
+      required: [true, 'Email 為必填'],
       unique: true,
-      validate: [validator.isEmail, "Email 格式錯誤"],
+      validate: [validator.isEmail, 'Email 格式錯誤']
     },
     // 密碼 Never Show to user
     password: {
       type: String,
-      required: [true, "密碼 為必填"],
-      min: [8, "密碼 至少 8 碼以上"],
+      required: [true, '密碼 為必填'],
+      min: [8, '密碼 至少 8 碼以上'],
       trim: true,
-      select: false,
+      select: false
     },
     // 性別
     gender: {
       type: String,
       required: false,
       enum: {
-        values: ["male", "female"],
-        message: "不接受 {VALUE}，僅接受 male, female",
-      },
+        values: ['male', 'female'],
+        message: '不接受 {VALUE}，僅接受 male, female'
+      }
     },
     // 大頭照 驗證解析度寬度至少 300、圖片寬高比 1:1
     avatar: {
       type: String,
       required: false,
-      default: " ",
+      default: ' '
     },
     // 追蹤名單
     followings: [
@@ -46,12 +46,12 @@ const userSchema = new Schema(
         _id: false,
         user: {
           type: mongoose.Schema.ObjectId,
-          ref: "User",
+          ref: 'User'
         },
         createdAt: {
-          type: Number,
-        },
-      },
+          type: Number
+        }
+      }
     ],
     // 被追蹤名單
     followers: [
@@ -59,28 +59,28 @@ const userSchema = new Schema(
         _id: false,
         user: {
           type: mongoose.Schema.ObjectId,
-          ref: "User",
+          ref: 'User'
         },
         createdAt: {
-          type: Number,
-        },
-      },
+          type: Number
+        }
+      }
     ],
     createdAt: {
-      type: Number,
+      type: Number
     },
     updatedAt: {
-      type: Number,
-    },
+      type: Number
+    }
   },
   {
     versionKey: false,
     timestamps: {
-      currentTime: () => Date.now(),
-    },
+      currentTime: () => Date.now()
+    }
   }
-);
+)
 
-const User = model("User", userSchema);
+const User = model('User', userSchema)
 
-module.exports = User;
+module.exports = User

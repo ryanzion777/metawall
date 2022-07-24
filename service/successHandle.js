@@ -3,9 +3,9 @@ const successHandle = ({ res, message, data }) => {
     .send({
       status: true,
       message,
-      data,
+      data
     })
-    .end();
-};
+    .end()
+}
 
-module.exports = successHandle;
+module.exports = successHandle
