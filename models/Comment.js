@@ -40,12 +40,12 @@ commentSchema.pre(/^find/, function (next) {
     select: '_id name avatar'
   })
   this.populate({
-    path: 'commentRelies'
+    path: 'commentReplies'
   })
   next()
 })
 
-commentSchema.virtual('commentRelies', {
+commentSchema.virtual('commentReplies', {
   ref: 'CommentReply',
   foreignField: 'comment',
   localField: '_id'
