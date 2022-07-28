@@ -12,12 +12,17 @@ const apiMessage = require('../service/apiMessage')
 const getPosts = catchAsync(async (req, res, next) => {
   // q => 搜尋項目
   // s => 資料排序
-  const { q, s } = req.query
+  // p => 取得頁數
+  const { q, s, p } = req.query
   const query = q ? { content: new RegExp(q) } : {}
   const sort =
     s === 'hot' ? { likes: -1 } : s === 'new' ? '-createdAt' : 'createdAt'
+  const limit = p ? 15 : 0
+  const skip = p === 1 ? 0 : (p - 1) * limit
 
   const data = await Post.find(query)
+    .skip(skip)
+    .limit(limit)
     .populate({
       path: 'user',
       select: 'name avatar'
